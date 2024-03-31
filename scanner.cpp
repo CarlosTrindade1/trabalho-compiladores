@@ -13,8 +13,7 @@ Scanner::Scanner(string input) {
     string line;
 
     if (inputFile.is_open()) {
-        while (getline(inputFile,line) )
-        {
+        while (getline(inputFile,line)) {
             this->input.append(line + '\n');
         }
         inputFile.close();
@@ -43,7 +42,7 @@ Token* Scanner::nextToken() {
  
 }
 
-void  Scanner::lexicalError(string msg) {
+void Scanner::lexicalError(string msg) {
     cout << "Linha "<< line << ": " << msg << endl;
     
     exit(EXIT_FAILURE);
