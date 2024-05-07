@@ -38,6 +38,8 @@ Token* Scanner::nextToken() {
                     return token;
                 } else if (isalpha(input[pos])) {
                     state = 1;
+                } else if (isspace(input[pos])) {
+                    state = 3;
                 } else {
                     lexicalError("Token mal formado");
                 }
@@ -57,6 +59,15 @@ Token* Scanner::nextToken() {
                 pos--;
 
                 return token;
+                break;
+            case 3:
+                if (!isspace(input[pos]))
+                    state = 4;
+
+                pos++;
+            case 4:
+                state = 0;
+                pos--;
                 break;
             default:
                 lexicalError("Token mal formado");
