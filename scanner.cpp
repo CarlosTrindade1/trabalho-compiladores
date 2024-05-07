@@ -31,15 +31,21 @@ Token* Scanner::nextToken() {
 
     while (true) {
         switch(state) {
-            // Estado de identificação do fim de arquivo
+            // Estado inicial
             case 0:
+                // Idenfiticador do fim de linha
                 if (input[pos] == '\n') {
                     token = new Token(END_OF_LINE);
                     return token;
+                // Início do identificador de ID
                 } else if (isalpha(input[pos])) {
                     state = 1;
+                // Início do whitespace ignorer
                 } else if (isspace(input[pos])) {
                     state = 3;
+                // Inícios da identificação de operadores
+                } else if (input[pos] == '&') {
+                    state = 5;
                 } else {
                     lexicalError("Token mal formado");
                 }
@@ -60,6 +66,7 @@ Token* Scanner::nextToken() {
 
                 return token;
                 break;
+            // Estados 3 e 4: Implementação do whitespace ignorer
             case 3:
                 if (!isspace(input[pos]))
                     state = 4;
@@ -68,6 +75,20 @@ Token* Scanner::nextToken() {
             case 4:
                 state = 0;
                 pos--;
+                break;
+            // TODO
+            case 5:
+                if (input[pos] == '&')
+                    state = 6;
+                else
+                    lexicalError("Token mal formado");
+
+                pos++;
+                break;
+
+            case 6:
+                token = new Token(OP, AND);
+                return token;
                 break;
             default:
                 lexicalError("Token mal formado");
