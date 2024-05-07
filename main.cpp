@@ -28,7 +28,7 @@ int main(int argc, char* argv[]) {
         
         print(token);
 
-    } while (token->name != END_OF_LINE);
+    } while (token->name != END_OF_FILE);
 
     cout << endl;
 
@@ -39,8 +39,7 @@ int main(int argc, char* argv[]) {
     return 0;
 }
 
-void allocVetor()
-{
+void allocVetor() {
     vet = new string[47];
 
     vet[0] = "UNDEF";//0
@@ -92,13 +91,11 @@ void allocVetor()
     vet[46] = "END_OF_FILE";//16
 }
 
-void freeVetor()
-{
+void freeVetor() {
     delete[] vet;
 }
 
-void print(Token* t)
-{
+void print(Token* t) {
     cout << vet[t->name];
 
     if (t->attribute != UNDEF)

@@ -13,6 +13,7 @@ Scanner::Scanner(string input) {
         while (getline(inputFile, line)) {
             this->input.append(line + '\n');
         }
+        this->input.append("\0");
         inputFile.close();
     } else  {
         cout << "Unable to open file\n"; 
@@ -34,8 +35,8 @@ Token* Scanner::nextToken() {
             // Estado inicial
             case 0:
                 // Idenfiticador do fim de linha
-                if (input[pos] == '\n') {
-                    token = new Token(END_OF_LINE);
+                if (input[pos] == '\0') {
+                    token = new Token(END_OF_FILE);
                     return token;
                 // Início do identificador de ID
                 } else if (isalpha(input[pos])) {
