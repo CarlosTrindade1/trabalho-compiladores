@@ -50,7 +50,8 @@ enum Names {
     COMMA, // 42
     NUMBER, // 43
     INTEGER_LITERAL, // 44
-    END_OF_FILE // 45
+    END_OF_LINE, // 45
+    END_OF_FILE // 46
 };
 
 class Token {

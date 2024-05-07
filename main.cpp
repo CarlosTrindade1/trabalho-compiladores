@@ -9,19 +9,20 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    string input;
-    
-    //getline(cin, input);
+    char* file_name = argv[1];
 
-    Scanner* scanner = new Scanner(argv[1]);
+    Scanner* scanner = new Scanner(file_name);
     
-    Token* t;
+    Token* token;
     
     do {
-        t = scanner->nextToken();
+        token = scanner->nextToken();
         
-        cout << t->name << " ";
-    } while (t->name != END_OF_FILE);
+        cout << token->name << " ";
+
+    } while (token->name != END_OF_LINE);
+
+    cout << endl;
 
     delete scanner;
     
