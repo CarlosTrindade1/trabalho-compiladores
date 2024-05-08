@@ -38,6 +38,9 @@ Token* Scanner::nextToken() {
                 if (input[pos] == '\0') {
                     token = new Token(END_OF_FILE);
                     return token;
+                
+                } else if (input[pos] == '\n') {
+                    this->line++;
                 // Início do identificador de ID
                 } else if (isalpha(input[pos])) {
                     state = 1;
@@ -45,8 +48,12 @@ Token* Scanner::nextToken() {
                 } else if (isspace(input[pos])) {
                     state = 3;
                 // Inícios da identificação de operadores
-                } else if (input[pos] == '&') {
+                } else if (input[pos] == '&') { // AND '&&'
                     state = 5;
+                } else if (input[pos] == '<') { // LT '<'
+                    state = 7;
+                } else if (input[pos] == '>') { // GT '>'
+                    state = 8;
                 } else {
                     lexicalError("Token mal formado");
                 }
@@ -77,8 +84,8 @@ Token* Scanner::nextToken() {
                 state = 0;
                 pos--;
                 break;
-            // TODO
-            case 5:
+            // Estados 5-X: Implementação da identificação dos operadores
+            case 5: // AND '&&'
                 if (input[pos] == '&')
                     state = 6;
                 else
@@ -87,8 +94,17 @@ Token* Scanner::nextToken() {
                 pos++;
                 break;
 
-            case 6:
+            case 6: // AND '&&'
                 token = new Token(OP, AND);
+                return token;
+                break;
+
+            case 7: // LT '<'
+                token = new Token(OP, LT);
+                return token;
+                break;
+            case 8: // GT '>'
+                token = new Token(OP, GT);
                 return token;
                 break;
             default:
