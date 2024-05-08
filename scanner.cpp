@@ -38,7 +38,7 @@ Token* Scanner::nextToken() {
                 if (input[pos] == '\0') {
                     token = new Token(END_OF_FILE);
                     return token;
-                
+                // Incrementador de linha
                 } else if (input[pos] == '\n') {
                     this->line++;
                 // Início do identificador de ID
@@ -54,6 +54,12 @@ Token* Scanner::nextToken() {
                     state = 7;
                 } else if (input[pos] == '>') { // GT '>'
                     state = 8;
+                } else if (input[pos] == '+') { // PLUS '+'
+                    state = 9;
+                } else if (input[pos] == '-') { // MINUS '-'
+                    state = 10;
+                } else if (input[pos] == '*') { // MULT '*'
+                    state = 11;
                 } else {
                     lexicalError("Token mal formado");
                 }
@@ -105,6 +111,18 @@ Token* Scanner::nextToken() {
                 break;
             case 8: // GT '>'
                 token = new Token(OP, GT);
+                return token;
+                break;
+            case 9:
+                token = new Token(OP, PLUS);
+                return token;
+                break;
+            case 10:
+                token = new Token(OP, MINUS);
+                return token;
+                break;
+            case 11:
+                token = new Token(OP, MULT);
                 return token;
                 break;
             default:
