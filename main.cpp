@@ -40,7 +40,7 @@ int main(int argc, char* argv[]) {
 }
 
 void allocVetor() {
-    vet = new string[47];
+    vet = new string[50];
 
     vet[0] = "UNDEF";//0
     vet[1] = "ID";//1
@@ -87,8 +87,11 @@ void allocVetor() {
     vet[42] = "COMMA";//16
     vet[43] = "NUMBER";//16
     vet[44] = "INTEGER_LITERAL";//16
-    vet[45] = "END_OF_LINE";//16
-    vet[46] = "END_OF_FILE";//16
+    vet[45] = "CMT"; // 45
+    vet[46] = "START_OF_CMT"; // 46
+    vet[47] = "END_OF_CMT"; // 47
+    vet[48] = "END_OF_LINE";//16
+    vet[49] = "END_OF_FILE";//16
 }
 
 void freeVetor() {

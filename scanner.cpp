@@ -60,6 +60,8 @@ Token* Scanner::nextToken() {
                     state = 10;
                 } else if (input[pos] == '*') { // MULT '*'
                     state = 11;
+                } else if (input[pos] == '/') { // DIV '/'
+                    state = 12;
                 } else {
                     lexicalError("Token mal formado");
                 }
@@ -113,18 +115,35 @@ Token* Scanner::nextToken() {
                 token = new Token(OP, GT);
                 return token;
                 break;
-            case 9:
+            case 9: // PLUS '+'
                 token = new Token(OP, PLUS);
                 return token;
                 break;
-            case 10:
+            case 10: // MINUS '-'
                 token = new Token(OP, MINUS);
                 return token;
                 break;
-            case 11:
+            case 11: // MULT '*'
                 token = new Token(OP, MULT);
                 return token;
                 break;
+            case 12: // DIV '/' e comentários
+                if (input[pos] == '/')
+                    state = 13;
+                else if (input[pos] == '*')
+                    state = 14;
+                else
+                    state = 15;
+
+                pos++;
+
+                break;
+            case 13:
+                token = new Token(CMT);
+
+                // TODO: Ignorar os símbolos do comentários
+                break;
+            
             default:
                 lexicalError("Token mal formado");
         }
