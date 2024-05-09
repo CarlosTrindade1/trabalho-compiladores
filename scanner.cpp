@@ -124,32 +124,63 @@ Token* Scanner::nextToken() {
                 return token;
                 break;
             case 11: // MULT '*'
-                token = new Token(OP, MULT);
-                return token;
-                break;
-            case 12: // DIV '/' e comentários
                 if (input[pos] == '/')
                     state = 13;
+                else
+                    state = 12;
+
+                pos++;
+                break;
+            case 12:
+                token = new Token(OP, MULT);
+
+                pos--;
+
+                return token;
+                break;
+            case 13:
+                token = new Token(END_OF_CMT);
+                return token;
+                break;
+            case 14: // DIV '/' e CMTs
+                if (input[pos] == '/')
+                    state = 16;
                 else if (input[pos] == '*')
-                    state = 14;
+                    state = 18;
                 else
                     state = 15;
 
                 pos++;
 
                 break;
-            case 13: // CMT
+            case 15: // DIV '/'
+                token = new Token(OP, DIV);
+
+                pos--;
+                
+                return token;
+                break;
+            case 16: // CMT
                 if (input[pos] == '\n')
-                    state = 14;
+                    state = 17;
 
                 pos++;
                 break;
-            case 14: // CMT
+            case 17: // CMT
                 token = new Token(CMT);
 
                 this->line++;
 
                 return token;
+                break;
+            case 18: // START_OF_CMT
+                if (input[pos] == '*')
+                    state = 19;
+
+                pos++;
+                break;
+            case 19:
+                // TODO: Implementar o reconhecimento de fim de comentário
                 break;
             default:
                 lexicalError("Token mal formado");
