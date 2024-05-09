@@ -138,12 +138,19 @@ Token* Scanner::nextToken() {
                 pos++;
 
                 break;
-            case 13:
+            case 13: // CMT
+                if (input[pos] == '\n')
+                    state = 14;
+
+                pos++;
+                break;
+            case 14: // CMT
                 token = new Token(CMT);
 
-                // TODO: Ignorar os símbolos do comentários
+                this->line++;
+
+                return token;
                 break;
-            
             default:
                 lexicalError("Token mal formado");
         }
