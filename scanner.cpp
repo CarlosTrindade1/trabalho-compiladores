@@ -60,8 +60,10 @@ Token* Scanner::nextToken() {
                     state = 10;
                 } else if (input[pos] == '*') { // MULT '*'
                     state = 11;
-                } else if (input[pos] == '/') { // DIV '/'
+                } else if (input[pos] == '/') { // DIV '/' e CMT
                     state = 12;
+                } else if (input[pos] == '=') { // ATRIB '=' e OP(EQ)
+                    state = 19;
                 } else {
                     lexicalError("Token mal formado");
                 }
@@ -172,6 +174,26 @@ Token* Scanner::nextToken() {
                 pos++;
             case 18:
                 token = new Token(CMT);
+                return token;
+            case 19:
+                if (input[pos] == '=')
+                    state = 21;
+                else
+                    state = 20;
+
+                pos++;
+
+                break;
+            case 20:
+                token = new Token(OP, ATRIB);
+                return token;
+                break;
+
+            case 21:
+                token = new Token(OP, EQ);
+                
+                pos--;
+
                 return token;
             default:
                 lexicalError("Token mal formado");
