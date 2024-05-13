@@ -64,6 +64,8 @@ Token* Scanner::nextToken() {
                     state = 12;
                 } else if (input[pos] == '=') { // ATRIB '=' e OP(EQ)
                     state = 19;
+                } else if (input[pos] == '!') { // OP(NEQ) e OP(NOT)
+                    state = 22;
                 } else {
                     lexicalError("Token mal formado");
                 }
@@ -94,7 +96,7 @@ Token* Scanner::nextToken() {
                 state = 0;
                 pos--;
                 break;
-            // Estados 5-X: Implementação da identificação dos operadores
+            // Estados 5-X: Implementação da identificação dos operadores e comentários
             case 5: // AND '&&'
                 if (input[pos] == '&')
                     state = 6;
@@ -160,43 +162,62 @@ Token* Scanner::nextToken() {
 
                 return token;
                 break;
-            case 16:
+            case 16: // CMT
                 if (input[pos] == '*')
                     state = 17;
 
                 pos++;
                 break;
-            case 17:
+            case 17: // CMT
                 if (input[pos] == '/')
                     state = 18;
                 else
                     state = 16;
                 pos++;
-            case 18:
+                break;
+            case 18: // CMT
                 token = new Token(CMT);
                 return token;
-            case 19:
+                break;
+            case 19: // OP(ATRIB) e OP(EQ)
                 if (input[pos] == '=')
                     state = 21;
                 else
                     state = 20;
 
                 pos++;
-
                 break;
-            case 20:
+            case 20: // OP(ATRIB)
                 token = new Token(OP, ATRIB);
                 return token;
                 break;
-
-            case 21:
+            case 21: // OP(EQ)
                 token = new Token(OP, EQ);
                 
                 pos--;
 
                 return token;
+                break;
+            case 22: // OP(NEQ) e OP(NOT)
+                if (input[pos] == '=')
+                    state = 24;
+                else
+                    state = 23;
+
+                pos++;
+                break;
+            case 23: // OP(NOT)
+                token = new Token(OP, NOT);
+                pos--;
+                return token;
+                break;
+            case 24: // OP(NEQ)
+                token = new Token(OP, NEQ);
+                return token;
+                break;
             default:
                 lexicalError("Token mal formado");
+                break;
         }
     }
     return token;
