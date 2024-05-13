@@ -124,64 +124,55 @@ Token* Scanner::nextToken() {
                 return token;
                 break;
             case 11: // MULT '*'
-                if (input[pos] == '/')
-                    state = 13;
-                else
-                    state = 12;
-
-                pos++;
-                break;
-            case 12:
                 token = new Token(OP, MULT);
-
-                pos--;
-
                 return token;
                 break;
-            case 13:
-                token = new Token(END_OF_CMT);
-                return token;
-                break;
-            case 14: // DIV '/' e CMTs
+            case 12: // DIV '/' e CMTs
                 if (input[pos] == '/')
-                    state = 16;
+                    state = 14;
                 else if (input[pos] == '*')
-                    state = 18;
+                    state = 16;
                 else
-                    state = 15;
+                    state = 13;
 
                 pos++;
 
                 break;
-            case 15: // DIV '/'
+            case 13: // DIV '/'
                 token = new Token(OP, DIV);
 
                 pos--;
                 
                 return token;
                 break;
-            case 16: // CMT
+            case 14: // CMT
                 if (input[pos] == '\n')
-                    state = 17;
+                    state = 15;
 
                 pos++;
                 break;
-            case 17: // CMT
+            case 15: // CMT
                 token = new Token(CMT);
 
                 this->line++;
 
                 return token;
                 break;
-            case 18: // START_OF_CMT
+            case 16:
                 if (input[pos] == '*')
-                    state = 19;
+                    state = 17;
 
                 pos++;
                 break;
-            case 19:
-                // TODO: Implementar o reconhecimento de fim de comentário
-                break;
+            case 17:
+                if (input[pos] == '/')
+                    state = 18;
+                else
+                    state = 16;
+                pos++;
+            case 18:
+                token = new Token(CMT);
+                return token;
             default:
                 lexicalError("Token mal formado");
         }
