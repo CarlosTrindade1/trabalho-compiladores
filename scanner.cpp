@@ -70,6 +70,14 @@ Token* Scanner::nextToken() {
                     state = 25;
                 } else if (input[pos] == ')') { // SEP(R_PAREN)
                     state = 26;
+                } else if (input[pos] == '[') { // SEP(L_BRACKET)
+                    state = 27;
+                } else if (input[pos] == ']') { // SEP(L_BRACKET)
+                    state = 28;
+                } else if (input[pos] == '{') { // SEP(L_KEY)
+                    state = 29;
+                } else if (input[pos] == '}') { // SEP(R_KEY)
+                    state = 30;
                 } else {
                     lexicalError("Token mal formado");
                 }
@@ -225,6 +233,22 @@ Token* Scanner::nextToken() {
                 break;
             case 26: // SEP(L_PAREN)
                 token = new Token(SEP, R_PAREN);
+                return token;
+                break;
+            case 27: // SEP(L_BRACKET)
+                token = new Token(SEP, L_BRACKET);
+                return token;
+                break;
+            case 28: // SEP(L_BRACKET)
+                token = new Token(SEP, R_BRACKET);
+                return token;
+                break;
+            case 29: // SEP(L_KEY)
+                token = new Token(SEP, L_KEY);
+                return token;
+                break;
+            case 30: // SEP(R_KEY)
+                token = new Token(SEP, R_KEY);
                 return token;
                 break;
             default:
