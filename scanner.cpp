@@ -165,6 +165,8 @@ Token* Scanner::nextToken() {
             case 16: // CMT
                 if (input[pos] == '*')
                     state = 17;
+                else if (input[pos] == '\0')
+                    lexicalError("Token mal formado");
 
                 pos++;
                 break;
