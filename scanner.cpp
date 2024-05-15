@@ -78,6 +78,12 @@ Token* Scanner::nextToken() {
                     state = 29;
                 } else if (input[pos] == '}') { // SEP(R_KEY)
                     state = 30;
+                } else if (input[pos] == ';') { // SEP(SEMI)
+                    state = 31;
+                } else if (input[pos] == '.') { // SEP(DOT)
+                    state = 32;
+                } else if (input[pos] == ',') { // SEP(COMMA)
+                    state = 33;
                 } else {
                     lexicalError("Token mal formado");
                 }
@@ -108,7 +114,7 @@ Token* Scanner::nextToken() {
                 state = 0;
                 pos--;
                 break;
-            // Estados 5-X: Implementação da identificação dos operadores e comentários
+            // Estados 5-24: Implementação da identificação dos operadores e comentários
             case 5: // AND '&&'
                 if (input[pos] == '&')
                     state = 6;
@@ -227,6 +233,7 @@ Token* Scanner::nextToken() {
                 token = new Token(OP, NEQ);
                 return token;
                 break;
+            // Estados 25-33: Implementação dos separadores
             case 25: // SEP(L_PAREN)
                 token = new Token(SEP, L_PAREN);
                 return token;
@@ -249,6 +256,18 @@ Token* Scanner::nextToken() {
                 break;
             case 30: // SEP(R_KEY)
                 token = new Token(SEP, R_KEY);
+                return token;
+                break;
+            case 31: // SEP(SEMI)
+                token = new Token(SEP, SEMI);
+                return token;
+                break;
+            case 32: // SEP(DOT)
+                token = new Token(SEP, DOT);
+                return token;
+                break;
+            case 33: // SEP(COMMA)
+                token = new Token(SEP, COMMA);
                 return token;
                 break;
             default:
