@@ -195,13 +195,11 @@ Token* Scanner::nextToken() {
                 break;
             case 20: // OP(ATRIB)
                 token = new Token(OP, ATRIB);
+                pos--;
                 return token;
                 break;
             case 21: // OP(EQ)
                 token = new Token(OP, EQ);
-                
-                pos--;
-
                 return token;
                 break;
             case 22: // OP(NEQ) e OP(NOT)
