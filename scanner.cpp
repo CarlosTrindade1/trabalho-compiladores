@@ -84,6 +84,8 @@ Token* Scanner::nextToken() {
                     state = 32;
                 } else if (input[pos] == ',') { // SEP(COMMA)
                     state = 33;
+                } else if (isdigit(input[pos])) { // INTEGER_LITERAL
+                    state = 34;
                 } else {
                     lexicalError("Token mal formado");
                 }
@@ -268,6 +270,18 @@ Token* Scanner::nextToken() {
                 break;
             case 33: // SEP(COMMA)
                 token = new Token(SEP, COMMA);
+                return token;
+                break;
+            case 34: // INTEGER_LITERAL
+                if (!isdigit(input[pos]))
+                    state = 35;
+                
+                pos++;
+
+                break;
+            case 35:
+                token = new Token(INTEGER_LITERAL);
+                pos--;
                 return token;
                 break;
             default:
