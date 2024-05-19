@@ -1,7 +1,7 @@
 all: main run
 
-main: main.o scanner.o
-	g++ scanner.o main.o -o analisador_lexico
+main: main.o scanner.o parser.o
+	g++ scanner.o main.o parser.o -o analisador_lexico
 	
 
 main.o:
@@ -9,6 +9,9 @@ main.o:
 
 scanner.o:
 	g++ -c scanner.cpp -o scanner.o
+
+parser.o:
+	g++ -c parser.cpp -o parser.o
 
 run:
 	./analisador_lexico main.mj

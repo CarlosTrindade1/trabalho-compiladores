@@ -1,4 +1,5 @@
-#include "scanner.h"
+//#include "scanner.h"
+#include "parser.h"
 
 string* vet;
 
