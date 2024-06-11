@@ -16,7 +16,7 @@ Scanner::Scanner(string input) {
         this->input.append("\0");
         inputFile.close();
     } else  {
-        cout << "Unable to open file\n"; 
+        cout << "Unable to open file\n";
     }
 }
 
@@ -90,17 +90,30 @@ Token* Scanner::nextToken() {
                     lexicalError("Token mal formado");
                 }
 
+                lexeme += input[pos];
                 pos++;
                 break;
             // Estados 1 e 2: Implementação da identificação de IDs
             case 1:
-                if (!isalnum(input[pos]))
+                if (!isalnum(input[pos]) && input[pos] != '.') {
                     state = 2;
+                } else if (input[pos] == '.') {
+                    state = 0;
+                    lexeme += input[pos];
+                } else {
+                    lexeme += input[pos];
+                }
 
                 pos++;
                 break;
             case 2:
-                token = new Token(ID);
+                cout << lexeme << endl;
+                if (isReservedWord(lexeme))
+                    token = new Token(CLASS);
+                else if (isValidId(lexeme))
+                    token = new Token(ID);
+                else
+                    lexicalError("Token mal formado.");
 
                 pos--;
 
@@ -296,4 +309,22 @@ void Scanner::lexicalError(string msg) {
     cout << "Linha "<< line << ": " << msg << endl;
     
     exit(EXIT_FAILURE);
+}
+
+bool Scanner::isReservedWord(string lexeme) {
+    for (int i = 0; i < reserved_words_qtd; i++) {
+        if (reserved_words[i] == lexeme) {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool Scanner::isValidId(string id){
+    for (char ch : id) {
+        if (ch == '.') {
+            return false;
+        }
+    }
+    return true;
 }

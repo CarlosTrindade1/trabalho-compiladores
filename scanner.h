@@ -6,6 +6,7 @@ class Scanner {
         string input;//Armazena o texto de entrada
         int pos;//Posição atual
         int line;
+        int reserved_words_qtd = 19;
         string reserved_words[19] = {
             "boolean",
             "class",
@@ -27,6 +28,9 @@ class Scanner {
             "void",
             "while"
         };
+        
+        bool isReservedWord(string lexeme);
+        bool isValidId(string id);
     
     public:
     //Construtor
