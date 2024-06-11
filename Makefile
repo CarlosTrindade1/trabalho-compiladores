@@ -1,7 +1,7 @@
 all: main run
 
 main: main.o scanner.o parser.o
-	g++ scanner.o main.o parser.o -o analisador_lexico
+	g++ scanner.o main.o parser.o -o minijava_compiler
 	
 
 main.o:
@@ -14,8 +14,9 @@ parser.o:
 	g++ -c parser.cpp -o parser.o
 
 run:
-	./analisador_lexico main.mj
+	./minijava_compiler main.mj
 
 clean:
 	rm main.o
 	rm scanner.o
+	rm minijava_compiler

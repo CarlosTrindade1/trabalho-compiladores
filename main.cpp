@@ -1,4 +1,4 @@
-//#include "scanner.h"
+#include <iostream>
 #include "parser.h"
 
 string* vet;
@@ -16,26 +16,32 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    char* file_name = argv[1];
+    Parser* parser = new Parser(argv[1]);
 
-    Scanner* scanner = new Scanner(file_name);
-    
-    allocVetor();
+    parser->run();
 
-    Token* token;
+    delete parser;
     
-    do {
-        token = scanner->nextToken();
+    // char* file_name = argv[1];
+
+    // Scanner* scanner = new Scanner(file_name);
+    
+    // allocVetor();
+
+    // Token* token;
+    
+    // do {
+    //     token = scanner->nextToken();
         
-        print(token);
+    //     print(token);
 
-    } while (token->name != END_OF_FILE);
+    // } while (token->name != END_OF_FILE);
 
-    cout << endl;
+    // cout << endl;
 
-    freeVetor();
+    // freeVetor();
 
-    delete scanner;
+    // delete scanner;
     
     return 0;
 }
