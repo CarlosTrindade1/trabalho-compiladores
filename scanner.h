@@ -31,6 +31,7 @@ class Scanner {
         
         bool isReservedWord(string lexeme);
         bool isValidId(string id);
+        Names getEnumReservedWord(string lexeme);
     
     public:
     //Construtor

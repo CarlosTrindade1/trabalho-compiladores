@@ -107,8 +107,10 @@ Token* Scanner::nextToken() {
                 pos++;
                 break;
             case 2:
-                if (isReservedWord(lexeme))
-                    token = new Token(CLASS);
+                if (isReservedWord(lexeme)) {
+                    int token_type = getEnumReservedWord(lexeme);
+                    token = new Token(token_type);
+                }
                 else if (isValidId(lexeme))
                     token = new Token(ID);
                 else
@@ -335,4 +337,47 @@ bool Scanner::isValidId(string id){
         }
     }
     return true;
+}
+
+Names Scanner::getEnumReservedWord(string lexeme) {
+    if (lexeme == "boolean") {
+        return BOOLEAN;
+    } else if (lexeme == "class") {
+        return CLASS;
+    } else if (lexeme == "else") {
+        return ELSE;
+    } else if (lexeme == "extends") {
+        return EXTENDS;
+    } else if (lexeme == "false") {
+        return FALSE;
+    } else if (lexeme == "if") {
+        return IF;
+    } else if (lexeme == "int") {
+        return INT;
+    } else if (lexeme == "length") {
+        return LENGTH;
+    } else if (lexeme == "main") {
+        return MAIN;
+    } else if (lexeme == "new") {
+        return NEW;
+    } else if (lexeme == "public") {
+        return PUBLIC;
+    } else if (lexeme == "return") {
+        return RETURN;
+    } else if (lexeme == "static") {
+        return STATIC;
+    } else if (lexeme == "String") {
+        return STRING;
+    } else if (lexeme == "System.out.println") {
+        return SOUT;
+    } else if (lexeme == "this") {
+        return THIS;
+    } else if (lexeme == "true") {
+        return TRUE;
+    } else if (lexeme == "void") {
+        return VOID;
+    } else if (lexeme == "while") {
+        return WHILE;
+    }
+    return UNDEF;
 }
