@@ -44,6 +44,7 @@ Token* Scanner::nextToken() {
                 // Início do identificador de ID
                 } else if (isalpha(input[pos])) {
                     state = 1;
+                    lexeme += input[pos];
                 // Início do whitespace ignorer
                 } else if (isspace(input[pos])) {
                     state = 3;
@@ -90,7 +91,6 @@ Token* Scanner::nextToken() {
                     lexicalError("Token mal formado");
                 }
 
-                lexeme += input[pos];
                 pos++;
                 break;
             // Estados 1 e 2: Implementação da identificação de IDs
@@ -98,7 +98,7 @@ Token* Scanner::nextToken() {
                 if (!isalnum(input[pos]) && input[pos] != '.') {
                     state = 2;
                 } else if (input[pos] == '.') {
-                    state = 0;
+                    state = 36;
                     lexeme += input[pos];
                 } else {
                     lexeme += input[pos];
@@ -107,7 +107,6 @@ Token* Scanner::nextToken() {
                 pos++;
                 break;
             case 2:
-                cout << lexeme << endl;
                 if (isReservedWord(lexeme))
                     token = new Token(CLASS);
                 else if (isValidId(lexeme))
@@ -296,6 +295,15 @@ Token* Scanner::nextToken() {
                 token = new Token(INTEGER_LITERAL);
                 pos--;
                 return token;
+                break;
+            case 36:
+                if (isalpha(input[pos]))
+                    state = 1;
+                else
+                    lexicalError("Token mal formado.");
+
+                lexeme += input[pos];
+                pos++;
                 break;
             default:
                 lexicalError("Token mal formado");
