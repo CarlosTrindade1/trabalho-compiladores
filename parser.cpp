@@ -30,7 +30,6 @@ void
 Parser::run()
 {
 	advance();	
-
 	program();
 	
 	cout << "Compilação encerrada com sucesso!\n";
@@ -48,7 +47,7 @@ void
 Parser::declarations()
 {
 	classDeclaration();
-	declarations();
+	// declarations();
 }
  
 void
