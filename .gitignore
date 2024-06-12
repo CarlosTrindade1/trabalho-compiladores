@@ -3,3 +3,5 @@ main.mj
 main.o
 scanner.o
 analisador_lexico
+teste1.mj
+mj_compiler

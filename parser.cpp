@@ -20,7 +20,7 @@ Parser::nextIs(int t)
 void
 Parser::match(int t)
 {
-	if (lToken->name == t || lToken->attribute == t)
+	if (nextIs(t))
 		advance();
 	else
 		error("Erro inesperado");
