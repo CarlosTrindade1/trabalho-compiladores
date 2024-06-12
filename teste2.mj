@@ -1,0 +1,10 @@
+class Main {
+    public static void main(String[] args) {
+        int a;
+        boolean b;
+        a = 10;
+        b = true;
+        System.out.println(a);
+        System.out.println(b);
+    }
+}
