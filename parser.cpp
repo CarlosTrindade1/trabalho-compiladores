@@ -46,7 +46,11 @@ Parser::program()
 void
 Parser::declarations()
 {
-	classDeclaration();
+	if (nextIs(CLASS)) {
+        classDeclaration();
+        declarations();
+    }
+	// classDeclaration();
 	// declarations();
 }
  
