@@ -1,14 +1,10 @@
 class Main {
-    int x;
-
     public static void main(String[] args) {
-        Main obj;
-        obj = new Main();
-        obj.x = 10;
-        System.out.println(obj.getX());
+        System.out.println(1);
     }
 
     public int getX() {
-        return this.x;
+        int x; 
+        return x;
     }
 }
