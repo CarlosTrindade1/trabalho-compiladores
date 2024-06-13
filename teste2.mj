@@ -5,4 +5,10 @@ class Main {
 }
 class Teste {
     int x;
+    int y;
+    int x;
+    public boolean teste(){
+        int var;
+        return 1;
+    }
 }

@@ -101,7 +101,7 @@ Parser::maybeExtend()
 void
 Parser::varDeclarations()
 {
-	if (nextIs(INT) ||nextIs(BOOLEAN) ||nextIs(ID)){
+	if (nextIs(INT) ||nextIs(BOOLEAN) || nextIs(ID)){
 		varDeclaration();
 		varDeclarations();
 	} else return;
@@ -127,26 +127,27 @@ Parser::varDeclaration()
 void
 Parser::methodDeclaration()
 {
-	match(PUBLIC);
-	type();
-	match(ID);
-	match(L_PAREN);
-	maybeParams();
-	match(R_PAREN);
-	match(L_KEY);
-	varDeclarations();
-	statements();
-	match(R_KEY);
+    match(PUBLIC);
+    type();
+    match(ID);
+    match(L_PAREN);
+    maybeParams();
+    match(R_PAREN);
+    match(L_KEY);
+    varDeclarations();
+    statements();
+    match(RETURN);
+    expression();
+    match(SEMI);
+    match(R_KEY);
 }
  
 void
 Parser::maybeParams()
 {
-	if (nextIs(R_PAREN)){
-		return;
-	} else {
-		params();
-	}
+    if (!nextIs(R_PAREN)){
+        params();
+    }
 }
  
 void
