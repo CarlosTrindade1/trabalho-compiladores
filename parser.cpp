@@ -31,7 +31,6 @@ Parser::run()
 {
 	advance();	
 	program();
-	
 	cout << "Compilação encerrada com sucesso!\n";
 }
 
@@ -50,8 +49,6 @@ Parser::declarations()
         classDeclaration();
         declarations();
     }
-	// classDeclaration();
-	// declarations();
 }
  
 void
@@ -95,7 +92,7 @@ Parser::maybeExtend()
 	if (nextIs(EXTENDS)){
 		match(EXTENDS);
 		match(ID);
-	} else return;
+	}
 }
  
 void
@@ -104,7 +101,7 @@ Parser::varDeclarations()
 	if (nextIs(INT) ||nextIs(BOOLEAN) || nextIs(ID)){
 		varDeclaration();
 		varDeclarations();
-	} else return;
+	}
 }
  
 void
@@ -113,7 +110,7 @@ Parser::methodDeclarations()
 	if (nextIs(PUBLIC)){
 		methodDeclaration();
 		methodDeclarations();
-	} else return;
+	}
 }
  
 void
