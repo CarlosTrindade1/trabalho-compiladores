@@ -1,0 +1,62 @@
+class Main {
+    public static void main(String[] args) {
+        {
+            while(1){
+                System.out.println(1);
+            }
+            if(1){
+                a = 5;
+            }else{
+                b = 2;
+            }
+        }   
+    }
+}
+
+class Teste {
+    public boolean teste(){
+        int a;
+        int b;
+        int c;
+        {
+            a = 5;
+            b = 10;
+            c  = 5;
+        }
+        if (a < b) {
+            System.out.println(1);
+        } else {
+            System.out.println(0); 
+        }
+
+        if (b > a) {
+            System.out.println(1);
+        } else {
+            System.out.println(0);
+        }
+
+        if (a == c) {
+            System.out.println(1); 
+        } else {
+            System.out.println(0); 
+        }
+
+        if (a != b) {
+            System.out.println(1); 
+        } else {
+            System.out.println(0); 
+        }
+        
+        
+        if (a < b && b > a && a == c && a != b) {
+            System.out.println(1); 
+        } else {
+            System.out.println(0); 
+        }
+
+        return 1;    
+    }   
+}
+
+
+

@@ -14,18 +14,22 @@ class Main {
 }
 
 class Teste {
-    int x;
-    int y;
-    int x;
     public boolean teste(){
-        int var;
-        return 1;
+        int x;
+        int y;
+        {
+            x = 5;
+            y = 6;
+        }
+  
+        if (x < y && y > x) {
+            System.out.println(1); 
+        } else {
+            System.out.println(0); 
+        }
+        
+        return 1;    
     }
 }
 
-class Teste2{
-    public boolean teste(){
-        int var;
-        return var;
-    }
-}
+

@@ -156,7 +156,7 @@ Parser::statements()
 	if (nextIs(L_KEY) || nextIs(IF) || nextIs(WHILE) || nextIs(SOUT) || nextIs(ID)){
 		statement();
 		statements();
-	} else return;
+	}
 }
  
 void
@@ -171,17 +171,13 @@ Parser::params()
 void
 Parser::moreParams()
 {
-
 	if(nextIs(COMMA)){
 		match(COMMA);
 		type();
 		match(ID);
 		moreParams();
 		
-	} else {
-		return;
 	}
-
 }
  
 void
@@ -190,9 +186,11 @@ Parser::type()
 	if (nextIs(INT)){
 		match(INT);
 		maybeArray();
-	} else if (nextIs(BOOLEAN)){
+	} else if(nextIs(BOOLEAN)){
 		match(BOOLEAN);
-	} else match(ID);
+	} else {
+		match(ID);
+	}
 }
  
 void
@@ -201,7 +199,7 @@ Parser::maybeArray()
 	if (nextIs(L_BRACKET)){
 		match(L_BRACKET);
 		match(R_BRACKET);
-	} else return;
+	}
 }
  
 void
@@ -233,8 +231,7 @@ Parser::statement()
 		match(SEMI);
 	} else {
 		match(ID);
-		statementCont() ;
-
+		statementCont();
 	} 
 }
  
@@ -269,7 +266,7 @@ Parser::expression2()
 		match(AND);
 		relExpression();
 		expression2();
-	} else return;
+	}
 }
  
 void
@@ -286,23 +283,19 @@ Parser::relExpression2()
 		match(LT);
 		addExpression();
 		relExpression2();
-
 	} else if (nextIs(GT)){
 		match(GT);
 		addExpression();
 		relExpression2();
-
 	} else if (nextIs(EQ)){
 		match(EQ);
 		addExpression();
 		relExpression2();
-
 	} else if (nextIs(NEQ)){
 		match(NEQ);
 		addExpression();
 		relExpression2();
-
-	} else return;
+	}
 }
  
 void
@@ -323,7 +316,7 @@ Parser::addExpression2()
 		match(MINUS);
 		multExpression() ;
 		addExpression2();
-	} else return;
+	}
 }
  
 void
@@ -345,8 +338,7 @@ Parser::multExpression2()
 		match(DIV);
 		unExpression();
 		multExpression2();
-
-	} else return;
+	}
 }
  
 void
@@ -370,7 +362,7 @@ Parser::unExpression()
 		match(L_BRACKET);
 		expression();
 		match(R_BRACKET);
-	}  else {
+	} else {
 		primExpression();
 		primExpressionCont();
 	}
@@ -409,7 +401,7 @@ Parser::primExpressionCont()
 		match(L_BRACKET);
 		expression();
 		match(R_BRACKET);
-	} else return;
+	}
 }
  
 void
@@ -423,15 +415,13 @@ Parser::primExpression2()
 			maybeExpressionList();
 			match(R_PAREN);
 		}
-	} else return;
+	}
 }
  
 void
 Parser::maybeExpressionList()
 {
-	if(nextIs(R_PAREN)) {
-		return;
-	} else {
+	if(!nextIs(R_PAREN)) {
 		expressionList();
 	}
 }
@@ -446,17 +436,13 @@ Parser::expressionList()
 void
 Parser::moreExpressions()
 {
-	if (nextIs(COMMA))
-	{
+	if (nextIs(COMMA)){
 		match(COMMA);
 		expression();
 		moreExpressions();
-	} else return;
-	
+	}
 }
  
-
-
 void
 Parser::error(string str)
 {
