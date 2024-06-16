@@ -19,4 +19,5 @@ run:
 clean:
 	rm main.o
 	rm scanner.o
+	rm parser.o
 	rm minijava_compiler

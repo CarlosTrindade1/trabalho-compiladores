@@ -2,5 +2,6 @@ main.mj
 .vscode
 main.o
 scanner.o
+parser.o
 analisador_lexico
 mj_compiler
