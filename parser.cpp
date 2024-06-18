@@ -23,7 +23,7 @@ Parser::match(int t)
 	if (nextIs(t))
 		advance();
 	else
-		error("Erro inesperado");
+		error("Ocorreu um erro de compilação");
 }
 
 void
