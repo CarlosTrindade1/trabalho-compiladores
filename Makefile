@@ -14,7 +14,13 @@ parser.o:
 	g++ -c parser.cpp -o parser.o
 
 run:
-	./minijava_compiler main.mj
+	./minijava_compiler teste1.mj
+	./minijava_compiler teste2.mj
+	./minijava_compiler teste3.mj
+	./minijava_compiler teste4.mj
+	./minijava_compiler teste5.mj
+	./minijava_compiler teste6.mj
+	./minijava_compiler teste7.mj
 
 clear:
 	rm main.o

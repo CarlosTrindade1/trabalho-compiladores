@@ -1,0 +1,21 @@
+class Main {
+    public static void main(String[] args) {
+        System.out.println(1);
+    }
+}
+
+class Teste {
+    int x;
+    int y;
+    int x;
+}
+
+class Teste1 extends Teste{
+    public boolean teste(){
+        int x;
+        {
+            x = Teste.x;
+        }
+        return 1; 
+    }
+}
