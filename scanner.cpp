@@ -295,8 +295,13 @@ Token* Scanner::nextToken() {
                 return token;
                 break;
             case 36:
-                if (isalpha(input[pos]))
+                if (lexeme == "System." && input[pos] == 'o' || lexeme == "System.out." && input[pos] == 'p')
                     state = 1;
+                else if (isalpha(input[pos])) {
+                    token = new Token(ID);
+                    pos--;
+                    return token;
+                }
                 else
                     lexicalError("Token mal formado.");
 
