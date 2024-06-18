@@ -190,11 +190,8 @@ Token* Scanner::nextToken() {
                 pos++;
                 break;
             case 15: // CMT
-                token = new Token(CMT);
-
+                state = 0;
                 this->line++;
-
-                return token;
                 break;
             case 16: // CMT
                 if (input[pos] == '*')
@@ -212,8 +209,7 @@ Token* Scanner::nextToken() {
                 pos++;
                 break;
             case 18: // CMT
-                token = new Token(CMT);
-                return token;
+                state = 0;
                 break;
             case 19: // OP(ATRIB) e OP(EQ)
                 if (input[pos] == '=')

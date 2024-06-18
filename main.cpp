@@ -22,27 +22,6 @@ int main(int argc, char* argv[]) {
 
     delete parser;
     
-    // char* file_name = argv[1];
-
-    // Scanner* scanner = new Scanner(file_name);
-    
-    // allocVetor();
-
-    // Token* token;
-    
-    // do {
-    //     token = scanner->nextToken();
-        
-    //     print(token);
-
-    // } while (token->name != END_OF_FILE);
-
-    // cout << endl;
-
-    // freeVetor();
-
-    // delete scanner;
-    
     return 0;
 }
 
