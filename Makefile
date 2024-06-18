@@ -1,4 +1,4 @@
-all: main run
+all: main
 
 main: main.o scanner.o parser.o
 	g++ scanner.o main.o parser.o -o minijava_compiler
