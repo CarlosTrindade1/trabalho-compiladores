@@ -16,7 +16,7 @@ parser.o:
 run:
 	./minijava_compiler main.mj
 
-clean:
+clear:
 	rm main.o
 	rm scanner.o
 	rm parser.o
